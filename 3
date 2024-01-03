@@ -1,0 +1,24 @@
+class Solution {
+    public int smallestSubstring(String S) {
+        // Code here
+        int min=Integer.MAX_VALUE;
+        int f=0;
+        int l=0;
+        HashMap<Character,Integer> map=new HashMap<>();
+        int n=S.length();
+        for(int i=0;i<n;i++)
+        {
+     map.put(S.charAt(i),i);
+            if(map.size()==3)
+            {
+                f=Math.min(map.get('0'),Math.min(map.get('1'),map.get('2')));
+                l=Math.max(map.get('0'),Math.max(map.get('1'),map.get('2')));
+                min=Math.min(min,l-f+1);
+                
+            }
+        }
+        if(map.size()<3)
+        return -1;
+        return min;
+    }
+};
