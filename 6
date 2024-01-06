@@ -1,0 +1,28 @@
+class Solution {
+    public static long sumOfPowers(long a, long b) {
+        // code here
+        if(b==1) return 0;
+        if(a==1) a++;
+        
+        int[] prime_fact=new int[(int)(b+1)];
+        Arrays.fill(prime_fact,-1);
+        
+        for(int i=2;i<=b;i++){
+            if(prime_fact[i] == -1){
+                for(int j=i;j<=b;j+=i){
+                    prime_fact[j]=i;
+                }
+            }
+}
+        long ans=0;
+        for(int i=(int) a;i<=b;i++){
+            int x=i;
+            while(x!=1){
+                x=x/prime_fact[x];
+                ans++;
+            }
+        }
+        return ans;
+    }
+}
+        
