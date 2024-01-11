@@ -1,0 +1,57 @@
+//{ Driver Code Starts
+// Initial Template for Java
+
+import java.io.*;
+import java.util.*;
+
+class GfG {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            String S = sc.next();
+            int K = sc.nextInt();
+            Solution obj = new Solution();
+            System.out.println(obj.removeKdigits(S, K));
+        }
+    }
+}
+
+// } Driver Code Ends
+
+
+// User function Template for Java
+
+class Solution {
+    public String removeKdigits(String S, int K) {
+        // code here
+          // treat ans as a stack in below for loop
+        ArrayList<Character> ans = new ArrayList<Character>();
+        for (int i = 0; i < S.length(); i++) {
+            char c = S.charAt(i);
+            while (ans.size() > 0 && ans.get(ans.size() - 1) > c && K > 0) {
+                ans.remove(ans.size() -
+                           1); // make sure digits in ans are in ascending order
+                K--;           // remove one char
+            }
+              if (ans.size() > 0 || c != '0') {
+                ans.add(c);
+            } // can't have leading '0'
+        }
+
+        while (ans.size() > 0 && K-- > 0) {
+            ans.remove(ans.size() - 1);
+        } // make sure remove k digits in total
+
+        if (ans.size() == 0) {
+            return "0";
+        }
+        StringBuilder sb = new StringBuilder();
+        // Appends characters one by one
+        for (Character ch : ans) {
+            sb.append(ch);
+        }
+
+        return sb.toString();
+    }
+}
